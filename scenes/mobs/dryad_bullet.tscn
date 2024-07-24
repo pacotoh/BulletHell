@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://jyc6engc0hw2"]
+
+[ext_resource type="Script" path="res://scripts/mobs/dryad_bullet.gd" id="1_maudx"]
+[ext_resource type="Texture2D" uid="uid://chq3x52pvkyk4" path="res://assets/Bullet-Hell-Assets/enemy_bullet.png" id="2_voa5d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rgvle"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vug20"]
+radius = 5.0
+
+[node name="DryadBullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_maudx")
+
+[node name="DryadBullet" type="Sprite2D" parent="."]
+texture = ExtResource("2_voa5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rgvle")
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vug20")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

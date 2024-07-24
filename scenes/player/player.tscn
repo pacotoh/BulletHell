@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0w5team73uv2"]
+
+[ext_resource type="Texture2D" uid="uid://fsrivwxh4lee" path="res://assets/Bullet-Hell-Assets/player.png" id="1_dlwry"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_jbpf2"]
+[ext_resource type="Script" path="res://scripts/player/bullet_pool.gd" id="3_8nesc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xfvcn"]
+radius = 3.53553
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8qp5"]
+size = Vector2(5, 10)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_jbpf2")
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = ExtResource("1_dlwry")
+hframes = 3
+frame = 1
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1.5)
+shape = SubResource("CircleShape2D_xfvcn")
+
+[node name="Bullets" type="Node" parent="."]
+script = ExtResource("3_8nesc")
+
+[node name="Cooldown" type="Timer" parent="Bullets"]
+wait_time = 0.5
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_r8qp5")
+
+[connection signal="timeout" from="Bullets/Cooldown" to="Bullets" method="_on_cooldown_timeout"]

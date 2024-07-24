@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bltldmh5yqcui"]
+
+[node name="BulletPool" type="Node2D"]

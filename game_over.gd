@@ -9,6 +9,7 @@ func _ready():
 
 
 func _on_retry_pressed():
-	player.reset_score()
+	Game.player_health = 5
+	Game.player_score = 0
 	player.reset_health()
 	get_tree().change_scene_to_file("res://scenes/player/world.tscn")
